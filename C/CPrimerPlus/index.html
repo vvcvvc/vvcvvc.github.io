@@ -1,0 +1,763 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>C Primer Plus学习笔记 | VVC</title><meta name="keywords" content="C"><meta name="author" content="vvc"><meta name="copyright" content="vvc"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="C语言学习过程中的一些笔记归档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C Primer Plus学习笔记">
+<meta property="og:url" content="http://vvc.wiki/C/CPrimerPlus/index.html">
+<meta property="og:site_name" content="VVC">
+<meta property="og:description" content="C语言学习过程中的一些笔记归档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vvc.obs.cn-east-3.myhuaweicloud.com/c_logo.jpeg">
+<meta property="article:published_time" content="2022-07-28T10:11:00.000Z">
+<meta property="article:modified_time" content="2022-07-31T03:54:47.493Z">
+<meta property="article:author" content="vvc">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vvc.obs.cn-east-3.myhuaweicloud.com/c_logo.jpeg"><link rel="shortcut icon" href="https://vvc.obs.cn-east-3.myhuaweicloud.com/vvc_icon.png"><link rel="canonical" href="http://vvc.wiki/C/CPrimerPlus/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C Primer Plus学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-31 11:54:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://vvc.obs.cn-east-3.myhuaweicloud.com/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">VVC</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">C Primer Plus学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-28T10:11:00.000Z" title="发表于 2022-07-28 18:11:00">2022-07-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-31T03:54:47.493Z" title="更新于 2022-07-31 11:54:47">2022-07-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="C Primer Plus学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="第一章-初识C语言"><a href="#第一章-初识C语言" class="headerlink" title="第一章 初识C语言"></a>第一章 初识C语言</h1><p>第一章暂无笔记</p>
+<h1 id="第二章-C语言概述"><a href="#第二章-C语言概述" class="headerlink" title="第二章 C语言概述"></a>第二章 C语言概述</h1><h2 id="旧式c代码main函数写法问题"><a href="#旧式c代码main函数写法问题" class="headerlink" title="旧式c代码main函数写法问题"></a>旧式c代码main函数写法问题</h2><blockquote>
+<p>引用于 C Primer Plus  73页</p>
+</blockquote>
+<ul>
+<li><code>main()</code></li>
+</ul>
+<p>C90标准勉强接受这种形式，但是C99和C11标准不允许这样写。因此，即使你使用的编译器允许，也不要这样写。</p>
+<ul>
+<li><code>void main()</code></li>
+</ul>
+<p>一些编译器允许这样写，但是所有的标准都未认可这种写法。因此，编译器不必接受这种形式，而且许多编译器都不能这样写。</p>
+<p><strong>需要强调的是，只要坚持使用标准形式，把程序从一个编译器移至另一个编译器时就不会出什么问题。</strong></p>
+<h2 id="标识符长度问题"><a href="#标识符长度问题" class="headerlink" title="标识符长度问题"></a>标识符长度问题</h2><blockquote>
+<p>引用于 C Primer Plus  78页</p>
+</blockquote>
+<p>C99和C11允许使用更长的标识符名，但是<strong>编译器只识别前63个字符</strong>。</p>
+<p>对于外部标识符，只允许使用31个字符。〔以前C90只允许6个字符，这是一个很大的进步。旧式编译器通常最多只允许使用8个字符。〕实际上，你可以使用<strong>更长的字符</strong>，但是<strong>编译器会忽略超出的字符</strong>。</p>
+<p>也就是说，如果有两个标识符名都有63个字符，只有一个字符不同，那么编译器会识别这是两个不同的名称。</p>
+<p>如果两个标识符都是64个字符，只有最后一个字符不同，那么编译器可能将其视为同一个名称，也可能不会。<strong>标准并未定义在这种情况下会发生什么</strong>。</p>
+<h1 id="第三章-数据和C"><a href="#第三章-数据和C" class="headerlink" title="第三章 数据和C"></a>第三章 数据和C</h1><h2 id="程序中存在scanf时getchar使程序暂停"><a href="#程序中存在scanf时getchar使程序暂停" class="headerlink" title="程序中存在scanf时getchar使程序暂停"></a>程序中存在scanf时getchar使程序暂停</h2><blockquote>
+<p>C Primer Plus  112页笔记</p>
+</blockquote>
+<p>scanf读取用户输入的数据之后，用户按下<strong>Enter</strong>发送一个换行符表示输入结束，此时这个换行符会<strong>被getchar()读取</strong></p>
+<p>因此在程序存在scanf的情况下，需要连续两个getchar()来使程序暂停。</p>
+<h2 id="printf遗漏参数"><a href="#printf遗漏参数" class="headerlink" title="printf遗漏参数"></a>printf遗漏参数</h2><blockquote>
+<p>C Primer Plus  122页笔记</p>
+</blockquote>
+<p>printf遗漏参数时，打印出来的是内存中的任意值</p>
+<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><h3 id="八进制-x2F-十六进制打印，显示前缀"><a href="#八进制-x2F-十六进制打印，显示前缀" class="headerlink" title="八进制&#x2F;十六进制打印，显示前缀"></a>八进制&#x2F;十六进制打印，显示前缀</h3><blockquote>
+<p>引用于 C Primer Plus  124页</p>
+</blockquote>
+<p>在C程序中，既可以使用和显示不同进制的数。不同的进制要使用不同的转换说明。以十进制显示数字，使用<code>%d</code>；以八进制显示数字，使用<code>%o</code>；以十六进制显示数字，使用<code>%x</code>。另外，要显示各进制数的前缀0、0x和0X，必须分别使用<code>%#o</code>、<code>%#x</code>、<code>%#X</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;dec = %d; octal = %o; hex = %x\n&quot;</span>, x, x, x);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;dec = %d; octal = %#o; hex = %#x\n&quot;</span>, x, x, x);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译并运行该程序，输出如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dec = <span class="number">100</span>; octal = <span class="number">144</span>; hex = <span class="number">64</span></span><br><span class="line">dec = <span class="number">100</span>; octal = <span class="number">0144</span>; hex = <span class="number">0x64</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="c整数类型字节数不同的原因"><a href="#c整数类型字节数不同的原因" class="headerlink" title="c整数类型字节数不同的原因"></a>c整数类型字节数不同的原因</h3><blockquote>
+<p>引用于 C Primer Plus  126页</p>
+</blockquote>
+<p>为什么说short类型“可能”比int类型占用的空间少，long类型“可能”比int类型占用的空间多？</p>
+<p>因为C语言只规定了<strong>short占用的存储空间不能多于int</strong>，<strong>long占用的存储空间不能少于int</strong>。这样规定是<strong>为了适应不同的机器</strong>。例如，过去的一台运行Windows 3的机器上，int类型和short类型都占16位，long类型占32位。后来，Windows和苹果系统都使用16位储存short类型，32位储存int类型和long类型（使用32位可以表示的整数数值超过20亿）。现在，计算机普遍使用64位处理器，为了储存64位的整数，才引入了long long类型。</p>
+<p>现在，个人计算机上最常见的设置是，<strong>long long占64位，long占32位，short占16位，int占16位或32位</strong>（依计算机的自然字长而定）。原则上，这4种类型代表4种不同的大小，但是在实际使用中，有些类型之间通常有重叠。</p>
+<p>选择使用的数据类型</p>
+<ul>
+<li><p>如果一个数超出了int类型的取值范围，且在long类型的取值范围内时，使用long类型。</p>
+</li>
+<li><p>对于那些long占用的空间比int大的系统，使用long类型会减慢运算速度。因此，如非必要，请不要使用long类型。</p>
+</li>
+<li><p>如果在long类型和int类型占用空间相同的机器上编写代码，当确实需要32位的整数时，应使用long类型而不是int类型，以便把程序移植到16位机后仍然可以正常工作。</p>
+</li>
+<li><p>如果确实需要64位的整数，应使用long long类型。</p>
+</li>
+<li><p>如果在int设置为32位的系统中要使用16位的值，应使用short类型以节省存储空间。通常，只有当程序使用相对于系统可用内存较大的整型数组时，才需要重点考虑节省空间的问题。</p>
+</li>
+<li><p>使用short类型的另一个原因是，计算机中某些组件使用的硬件寄存器是16位。</p>
+</li>
+</ul>
+<h3 id="整数默认类型及编译器尝试顺序"><a href="#整数默认类型及编译器尝试顺序" class="headerlink" title="整数默认类型及编译器尝试顺序"></a>整数默认类型及编译器尝试顺序</h3><blockquote>
+<p>引用于 C Primer Plus  127页</p>
+</blockquote>
+<ul>
+<li><p>通常，程序代码中使用的数字（如2345）都被储存为int类型。</p>
+<ul>
+<li>如果使用1000000这样的大数字，<strong>超出了int类型能表示的范围</strong>，编译器会将其视为long int类型（假设这种类型可以表示该数字）。</li>
+<li>如果数字超出long可表示的最大值，编译器则将其视为unsigned long类型。</li>
+<li>如果还不够大，编译器则将其视为long long或unsigned long long类型（前提是编译器能识别这些类型）。</li>
+</ul>
+</li>
+<li><p>八进制和十六进制常量被视为int类型。</p>
+<ul>
+<li>如果值太大，编译器会尝试使用unsigned int。</li>
+<li>如果还不够大，编译器会依次使用long、unsigned long、long long和unsigned long long类型。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>有些情况下，需要编译器以long类型储存一个小数字。例如，编程时要显式使用IBM PC上的内存地址时。另外，一些C标准函数也要求使用long类型的值。要把一个较小的常量作为long类型对待，可以在值的末尾加上l（小写的L）或L后缀。使用L后缀更好，因为l看上去和数字1很像。</p>
+</li>
+<li><p>因此，在int为16位、long为32位的系统中，会把7作为16位储存，把7L作为32位储存。l或L后缀也可用于八进制和十六进制整数，如020L和0x10L。</p>
+</li>
+<li><p>类似地，在支持long long类型的系统中，也可以使用ll或LL后缀来表示long long类型的值，如3LL。另外，u或U后缀表示unsigned long long，如5ull、10LLU、6LLU或9Ull。</p>
+</li>
+</ul>
+<h3 id="整数类型打印的占位符问题"><a href="#整数类型打印的占位符问题" class="headerlink" title="整数类型打印的占位符问题"></a>整数类型打印的占位符问题</h3><blockquote>
+<p>引用于 C Primer Plus  128页</p>
+</blockquote>
+<ul>
+<li><p>打印<code>unsigned int</code>类型的值，使用<code>%u</code>转换说明；</p>
+</li>
+<li><p>打印<code>long</code>类型的值，使用<code>%ld</code>转换说明。如果系统中int和long的大小相同，使用%d就行。但是，这样的程序被移植到其他系统（int和long类型的大小不同）中会无法正常工作。</p>
+</li>
+<li><p>在x和o前面可以使用l前缀，</p>
+<ul>
+<li><code>%lx</code>表示以<strong>十六进制格式打印long</strong>类型整数，</li>
+<li><code>%lo</code>表示以<strong>八进制格式打印long</strong>类型整数。</li>
+</ul>
+</li>
+<li><p>对于short类型，可以使用h前缀。</p>
+<ul>
+<li><code>%hd</code>表示以<strong>十进制显示short</strong>类型的整数，</li>
+<li><code>%ho</code>表示以八进制显示short类型的整数。</li>
+</ul>
+</li>
+<li><p>h和l前缀都可以和u一起使用，用于表示无符号类型。例如，<code>%lu</code>表示打印<strong>unsigned long</strong>类型的值。</p>
+</li>
+<li><p>对于支持long long类型的系统，%lld和%llu分别表示有符号和无符号类型。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> un = <span class="number">3000000000</span>; <span class="comment">/* int为32位和short为16位的系统 */</span></span><br><span class="line">    <span class="type">short</span> end = <span class="number">200</span>;</span><br><span class="line">    <span class="type">long</span> big = <span class="number">65537</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> verybig = <span class="number">12345678908642</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;un = %u and not %d\n&quot;</span>, un, un);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;end = %hd and %d\n&quot;</span>, end, end);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;big = %ld and not %hd\n&quot;</span>, big, big);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;verybig= %lld and not %ld\n&quot;</span>, verybig, verybig);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在特定的系统中输出如下（输出的结果可能不同）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">un = <span class="number">3000000000</span> and not <span class="number">-1294967296</span></span><br><span class="line">end = <span class="number">200</span> and <span class="number">200</span></span><br><span class="line">big = <span class="number">65537</span> and not <span class="number">1</span></span><br><span class="line">verybig= <span class="number">12345678908642</span> and not <span class="number">1942899938</span></span><br></pre></td></tr></table></figure>
+
+<p>该例表明，使用错误的转换说明会得到意想不到的结果。</p>
+<ul>
+<li>第1行输出，对于无符号变量 un，使用%d会生成负值！<ul>
+<li>其原因是，无符号值 3000000000和有符号值−129496296 在系统内存中的内部表示完全相同。</li>
+<li>在待打印的值大于有符号值的最大值时，会发生这种情况。</li>
+<li>对于较小的正数（如96），有符号和无符号类型的存储、显示都相同。</li>
+</ul>
+</li>
+<li>第2行输出，对于short类型的变量end，在printf()中无论指定以short类型（%hd）还是int类型（%d）打印，打印出来的值都相同。这是因为<strong>在给函数传递参数时，C编译器把short类型的值自动转换成int类型的值</strong>。你可能会提出疑问：为什么要进行转换？h修饰符有什么用？第1个问题的答案是，<strong>int类型被认为是计算机处理整数类型时最高效的类型</strong>。因此，<strong>在short和int类型的大小不同的计算机中，用int类型的参数传递速度更快。</strong>第2个问题的答案是，使用h修饰符可以显示较大整数被截断成 short 类型值的情况。第 3 行输出就演示了这种情况。把 65537 以二进制格式写成一个 32 位数是00000000000000010000000000000001。使用%hd，printf()只会查看后 16位，所以显示的值是 1。</li>
+</ul>
+<h3 id="可移植类型：stdint-h和inttypes-h"><a href="#可移植类型：stdint-h和inttypes-h" class="headerlink" title="可移植类型：stdint.h和inttypes.h"></a>可移植类型：stdint.h和inttypes.h</h3><blockquote>
+<p>引用于 C Primer Plus  140页</p>
+</blockquote>
+<p><strong>PS: &lt;inttypes.h&gt;包含&lt;stdint.h&gt;</strong></p>
+<p>C 语言提供了许多有用的整数类型。但是，某些类型名在不同系统中的功能不一样。C99 新增了两个头文件stdint.h和inttypes.h，以确保C语言的类型在各系统中的功能相同。</p>
+<ul>
+<li><p>C语言为现有类型创建了更多类型名。这些新的类型名定义在stdint.h头文件中。例如，<code>int32_t</code><strong>表示32位的有符号整数类型。</strong>在使用32位int的系统中，头文件会把int32_t作为int的别名。不同的系统也可以定义相同的类型名。例如，int为16位、long为32位的系统会把int32_t作为long的别名。然后，使用int32_t类型编写程序，并包含stdint.h头文件时，编译器会把int或long替换成与当前系统匹配的类型。上面讨论的类型别名是精确宽度整数类型（exact-width integer type）的示例。int32_t表示整数类型的宽度正好是32位。但是，计算机的底层系统可能不支持。因此，精确宽度整数类型是可选项。</p>
+</li>
+<li><p>如果系统不支持精确宽度整数类型怎么办？C99和C11提供了第2类别名集合。一些类型名保证所表示的类型一定是<strong>至少有指定宽度的最小整数类型</strong>。这组类型集合被称为<strong>最小宽度类型</strong>（minimum width type）。例如，<br><code>int_least8_t</code>是可容纳8位有符号整数值的类型中宽度最小的类型的一个别名。如果某系统的最小整数类型是16位，可能不会定义int8_t类型。尽管如此，该系统仍可使用int_least8_t类型，但可能把该类型实现为16位的整数类型。</p>
+</li>
+<li><p>当然，一些程序员更关心速度而非空间。为此，C99和C11定义了一组可使计算达到最快的类型集合。这组类型集合被称为最快最小宽度类型（fastst minimum width type）。例如，<code>int_fast8_t</code>被定义为系统中<strong>对8位有符号值而言运算最快的整数类型</strong>的别名。</p>
+</li>
+<li><p>另外，有些程序员需要系统的最大整数类型。为此，C99定义了<strong>最大的有符号整数</strong>类型<code>intmax_t</code>，可储存任何有效的有符号整数值。类似地，unitmax_t表示最大的无符号整数类型。顺带一提，这些类型有可能比long long和unsigned long类型更大，因为C编译器除了实现标准规定的类型以外，还可利用C语言实现其他类型。例如，一些编译器在标准引入 long long 类型之前，已提前实现了该类型。</p>
+</li>
+</ul>
+<hr>
+<p>C99 和 C11 不仅提供可移植的类型名，还提供相应的输入和输出。例如，printf()打印特定类型时要求与相应的转换说明匹配。如果要打印int32_t类型的值，有些定义使用%d，而有些定义使用%ld，怎么办？C 标准针对这<br>一情况，提供了一些字符串宏（第 4 章中详细介绍）来显示可移植类型。例如， inttypes.h头文件中定义了<code>PRId32</code>字符串宏，代表打印32位有符号值的合适转换说明（如d或l）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;inttypes.h&gt;</span> <span class="comment">// 支持可移植类型</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">int32_t</span> me32; <span class="comment">// me32是一个32位有符号整型变量</span></span><br><span class="line">    me32 = <span class="number">45933945</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;First, assume int32_t is int: &quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;me32 = %d\n&quot;</span>, me32);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Next, let&#x27;s not make any assumptions.\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Instead, use a \&quot;macro\&quot; from inttypes.h: &quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;me32 = %&quot;</span> PRId32 <span class="string">&quot;\n&quot;</span>, me32);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">First, assume int32_t is int: me32 = 45933945</span><br><span class="line">Next, let&#x27;s not make any assumptions.</span><br><span class="line">Instead, use a &quot;macro&quot; from inttypes.h: me32 = 45933945</span><br></pre></td></tr></table></figure>
+
+<p>C语言发展至今，虽然ISO已发布了C11标准，但是编译器供应商对C99的实现程度却各不相同。一些编译器仍未实现inttypes.h头文件及其相关功能。</p>
+<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><h3 id="c规定的浮点数精度标准"><a href="#c规定的浮点数精度标准" class="headerlink" title="c规定的浮点数精度标准"></a>c规定的浮点数精度标准</h3><blockquote>
+<p>引用于 C Primer Plus  143页</p>
+</blockquote>
+<p>C标准规定，<strong>float</strong>类型必须<strong>至少能表示6位有效数字</strong>，且取值范围至少是10^-37^～10^+37^。</p>
+<ul>
+<li>前一项规定指float类型必须至少精确表示小数点后的6位有效数字，如33.333333</li>
+<li>后一项规定用于方便地表示诸如太阳质量（2.0e30千克）、一个质子的电荷量（1.6e-19库仑）或国家债务之类的数字。</li>
+<li>通常，系统储存一个浮点数要占用32位。其中8位用于表示指数的值和符号，剩下24位用于表示非指数部分（也叫作尾数或有效数）及其符号</li>
+</ul>
+<p>C语言提供的另一种浮点类型是<strong>double</strong>（意为双精度）。double类型和float类型的最小取值范围相同，但<strong>至少必须能表示10位有效数字</strong>。</p>
+<ul>
+<li>一般情况下，double占用64位而不是32位。一些系统将多出的 32 位全部用来表示非指数部分，这不仅增加了有效数字的位数（即提高了精度），而且还减少了舍入误差。</li>
+<li>另一些系统把其中的一些位分配给指数部分，以容纳更大的指数，从而增加了可表示数的范围。</li>
+<li>无论哪种方法，double类型的值<strong>至少有13位有效数字</strong>，超过了标准的最低位数规定。</li>
+</ul>
+<p>C语言的第3种浮点类型是long double，以满足比double类型更高的精度要求。不过，C只保证long double类型至少与double类型的精度相同。</p>
+<h3 id="浮点数默认精度"><a href="#浮点数默认精度" class="headerlink" title="浮点数默认精度"></a>浮点数默认精度</h3><blockquote>
+<p>引用于 C Primer Plus  146页</p>
+</blockquote>
+<p><strong>默认</strong>情况下，编译器假定浮点型常量是<strong>double</strong>类型的精度</p>
+<p>例如，假设some是float类型的变量，编写下面的语句：<br>some &#x3D; 4.0 * 2.0;</p>
+<ul>
+<li><p>通常，4.0和2.0被储存为64位的double类型，使用<strong>双精度进行乘法运算</strong>，然后将乘积<strong>截断成float类型</strong>的宽度。这样做<strong>虽然计算精度更高</strong>，但是<strong>会减慢程序的运行速度</strong>。</p>
+</li>
+<li><p>在浮点数后面加上f或F后缀可覆盖默认设置，编译器会将浮点型常量看作float类型，如2.3f和9.11E9F。</p>
+</li>
+<li><p>使用l或L后缀使得数字成为long double类型，如54.3l和4.32L。注意，建议使用L后缀，因为字母l和数字1很容易混淆。</p>
+</li>
+<li><p>没有后缀的浮点型常量是double类型。</p>
+</li>
+</ul>
+<h3 id="十六进制表示浮点数"><a href="#十六进制表示浮点数" class="headerlink" title="十六进制表示浮点数"></a>十六进制表示浮点数</h3><blockquote>
+<p>引用于 C Primer Plus  146页</p>
+</blockquote>
+<p>C99 标准添加了一种新的浮点型常量格式——用十六进制表示浮点型常量，即在十六进制数前加上十六进制前缀（0x或0X），用p和P分别代替e和E，用2的幂代替10的幂（即，p计数法）。如下所示：</p>
+<p><code>0xa.1fp10</code></p>
+<ul>
+<li>十六进制a等于十进制10</li>
+<li>.1f是1&#x2F;16加上15&#x2F;256（十六进制f等于十进制15）</li>
+<li>p10是2^10^或1024</li>
+</ul>
+<p>0xa.1fp10表示的值是(10 + 1&#x2F;16 +15&#x2F;256)×1024（即，十进制10364.0）。</p>
+<p>注意，并非所有的编译器都支持C99的这一特性。</p>
+<ul>
+<li><p>printf()函数使用<code>%f</code>转换说明打印十进制记数法的float和double类型浮点数，</p>
+</li>
+<li><p>用<code>%e</code>打印指数记数法的浮点数。</p>
+</li>
+<li><p>如果系统支持十六进制格式的浮点数，可用<code>%a</code>和<code>%A</code>。</p>
+</li>
+<li><p>打印long double类型要使用%Lf、%Le或%La转换说明。</p>
+</li>
+</ul>
+<h3 id="浮点数上溢和下溢"><a href="#浮点数上溢和下溢" class="headerlink" title="浮点数上溢和下溢"></a>浮点数上溢和下溢</h3><blockquote>
+<p>引用于 C Primer Plus  148页</p>
+</blockquote>
+<p>假设系统的最大float类型值是3.4E38，编写如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> toobig = <span class="number">3.4E38</span> * <span class="number">100.0f</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%e\n&quot;</span>, toobig);</span><br></pre></td></tr></table></figure>
+
+<p>会发生什么？这是一个上溢（overflow）的示例。当计算导致数字过大，超过当前类型能表达的范围时，就会发生上溢。这种行为在过去是未定义的，不过现在C语言规定，在这种情况下会给toobig赋一个表示无穷大的<br>特定值，而且printf()显示该值为<strong>inf或infinity</strong>（或者具有无穷含义的其他内容）。</p>
+<hr>
+<p>当除以一个很小的数时，情况更为复杂。回忆一下，float类型的数以指数和尾数部分来储存。存在这样一个数，它的指数部分是最小值，即由全部可用位表示的最小尾数值。该数字是float类型能用全部精度表示的最小数<br>字。现在把它除以 2。通常，这个操作会减小指数部分，但是假设的情况中，指数已经是最小值了。所以计算机只好把尾数部分的位向右移，空出第1 个二进制位，并丢弃最后一个二进制数。以十进制为例，把一个有4位有<br>效数字的数（如，0.1234E-10）除以10，得到的结果是0.0123E-10。虽然得到了结果，但是在计算过程中却损失了原末尾有效位上的数字。这种情况叫作下溢（underflow）。<strong>C语言把损失了类型全精度的浮点值称为低于正常的（subnormal）浮点值</strong>。因此，<strong>把最小的正浮点数除以 2将得到一个低于正常的值。如果除以一个非常大的值，会导致所有的位都为0</strong>。现在，C库已提供了用于检查计算是否会产生低于正常值的函数。</p>
+<hr>
+<p>还有另一个特殊的浮点值NaN（not a number的缩写）。例如，给asin()函数传递一个值，该函数将返回一个角度，该角度的正弦就是传入函数的值。但是正弦值不能大于1，因此，如果传入的参数大于1，该函数的行为是<br>未定义的。在这种情况下，该函数将返回NaN值，printf()函数可将其显示为nan、NaN或其他类似的内容。</p>
+<h3 id="浮点数舍入错误"><a href="#浮点数舍入错误" class="headerlink" title="浮点数舍入错误"></a>浮点数舍入错误</h3><blockquote>
+<p>引用于 C Primer Plus  149页</p>
+</blockquote>
+<p>给定一个数，加上1，再减去原来给定的数，结果是多少？你一定认为是1。但是，下面的浮点运算给出了不同的答案：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">float</span> a,b;</span><br><span class="line">    b = <span class="number">2.0e20</span> + <span class="number">1.0</span>;</span><br><span class="line">    a = b - <span class="number">2.0e20</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%f \n&quot;</span>, a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该程序的输出如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.00000</span> <span class="comment">// Linux系统下的老式gcc</span></span><br><span class="line"><span class="number">-13584010575872.000000</span> <span class="comment">// Turbo c 1.5</span></span><br><span class="line"><span class="number">4008175468544.000000</span> <span class="comment">// XCode 4.5、Visual studio 2012、当前版本的gcC</span></span><br></pre></td></tr></table></figure>
+
+<p>得出这些奇怪答案的原因是，<strong>计算机缺少足够的小数位来完成正确的运算</strong>。2.0e20是 2后面有20个0。如果把该数加1，那么发生变化的是第21位。要正确运算，程序至少要储存21位数字。而<strong>float类型的数字通常只能储存按</strong><br><strong>指数比例缩小或放大的6或7位有效数字</strong>。在这种情况下，计算结果一定是错误的。</p>
+<p>另一方面，如果把2.0e20改成2.0e4，计算结果就没问题。因为2.0e4加1只需改变第5位上的数字，float类型的精度足够进行这样的计算。</p>
+<h1 id="第四章-字符串和格式化输入-x2F-输出"><a href="#第四章-字符串和格式化输入-x2F-输出" class="headerlink" title="第四章 字符串和格式化输入&#x2F;输出"></a>第四章 字符串和格式化输入&#x2F;输出</h1><h2 id="明示常量"><a href="#明示常量" class="headerlink" title="明示常量"></a>明示常量</h2><blockquote>
+<p>引用于 C Primer Plus  190页</p>
+</blockquote>
+<p>C头文件<code>limits.h</code>和<code>float.h</code>分别提供了与整数类型和浮点类型大小限制相关的详细信息。每个头文件都定义了一系列供实现使用的明示常量 。例如，<code>limits.h</code>头文件包含以下类似的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> INT_MAX +32767</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INT_MIN -32768</span></span><br></pre></td></tr></table></figure>
+
+<p>这些明示常量代表int类型可表示的最大值和最小值。如果系统使用32位的int，该头文件会为这些明示常量提供不同的值。</p>
+<table>
+<thead>
+<tr>
+<th>明示常量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CHAR_BIT</td>
+<td>char类型的位数</td>
+</tr>
+<tr>
+<td>CHAR_MAX</td>
+<td>char类型的最大值</td>
+</tr>
+<tr>
+<td>CHAR_MIN</td>
+<td>char 类型的最小值</td>
+</tr>
+<tr>
+<td>SCHAR_MAX</td>
+<td>signed char类型的最大值</td>
+</tr>
+<tr>
+<td>SCHAR_MIN</td>
+<td>signed char类型的最小值</td>
+</tr>
+<tr>
+<td>UCHAR_MAX</td>
+<td>unsigned char类型的最大值</td>
+</tr>
+<tr>
+<td>SHRT_MAX</td>
+<td>short类型的最大值</td>
+</tr>
+<tr>
+<td>SHRT_MIN</td>
+<td>short类型的最小值</td>
+</tr>
+<tr>
+<td>USHRT_MAX</td>
+<td>unsigned short类型的最大值</td>
+</tr>
+<tr>
+<td>INT_MAX</td>
+<td>int类型的最大值</td>
+</tr>
+<tr>
+<td>INT_MIN</td>
+<td>int类型的最小值</td>
+</tr>
+<tr>
+<td>UINT_MAX</td>
+<td>unsigned int的最大值</td>
+</tr>
+<tr>
+<td>LONG_MAX</td>
+<td>long类型的最大值</td>
+</tr>
+<tr>
+<td>LONG_MIN</td>
+<td>long类型的最小值</td>
+</tr>
+<tr>
+<td>ULONG_MAX</td>
+<td>unsigned long 类型的最大值</td>
+</tr>
+<tr>
+<td>LLONG_MAX</td>
+<td>long long类型的最大值</td>
+</tr>
+<tr>
+<td>LLONG_MIN</td>
+<td>long long类型的最小值</td>
+</tr>
+<tr>
+<td>ULLONG_MAX</td>
+<td>unsigned long long类型的最大值</td>
+</tr>
+</tbody></table>
+<p>类似地，float.h头文件中也定义一些明示常量，如FLT_DIG和DBL_DIG，分别表示float类型和double类型的有效数字位数。</p>
+<p>把明示常量名中的FLT分别替换成<strong>DBL</strong>和<strong>LDBL</strong>，即可分别表示double和long double类型对应的明示常量（表中<br>假设系统使用2的幂来表示浮点数，即<code>%e</code>输出）。</p>
+<table>
+<thead>
+<tr>
+<th>明示常量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FLT_MANT_DIG</td>
+<td>float类型的尾数位数</td>
+</tr>
+<tr>
+<td>FLT_DIG</td>
+<td>float类型的最少有效数字位数(十进制)</td>
+</tr>
+<tr>
+<td>FLT_MIN_10_EXP</td>
+<td>带全部有效数字的float类型的最小负指数（以10为底)</td>
+</tr>
+<tr>
+<td>FLT_MAX_10_EXP</td>
+<td>float类型的最大正指数(以10为底)</td>
+</tr>
+<tr>
+<td>FLT_MIN</td>
+<td>保留全部精度的float类型最小正数</td>
+</tr>
+<tr>
+<td>FLT_MAX</td>
+<td>float类型的最大正数</td>
+</tr>
+<tr>
+<td>FLT_EPSILON</td>
+<td>1.00和比1.00大的最小float类型值之间的差值</td>
+</tr>
+</tbody></table>
+<h2 id="printf-转换说明"><a href="#printf-转换说明" class="headerlink" title="printf 转换说明"></a>printf 转换说明</h2><blockquote>
+<p>引用于 C Primer Plus  200页</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>转换说明</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%a &#x2F; %A</td>
+<td>十六进制浮点数p记数法(C99&#x2F;C11)</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>单个字符</td>
+</tr>
+<tr>
+<td>%d &#x2F; %i</td>
+<td>有符号十进制整数</td>
+</tr>
+<tr>
+<td>%e &#x2F; %E</td>
+<td>浮点数，e记数法</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点数，十进制记数法</td>
+</tr>
+<tr>
+<td>%g &#x2F; %G</td>
+<td>根据值的不同，自动选择%f或%e。%e格式用于指数小于-4或者大于或等于精度时</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>无符号八进制整数</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>指针</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>无符号十进制整数</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>无符号十进制整数</td>
+</tr>
+<tr>
+<td>%x &#x2F; %X</td>
+<td>无符号十六进制整数，使用十六进制数0f&#x2F;0f</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>打印一个百分号</td>
+</tr>
+</tbody></table>
+<p>printf转换说明修饰符</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字</td>
+<td>最小字段宽度，如<code>%4d</code><br/>如果该字段不能容纳打印的数字或字符串，系统会使用更宽的字段</td>
+</tr>
+<tr>
+<td>.数字</td>
+<td>精度<br/>对于<code>%e</code>、<code>%E</code>和<code>%f</code>转换，表示小数点右边数字的位数<br/>对于<code>%g</code>和<code>%G</code>转换，表示有效数字最大位数<br/>对于<code>%s</code>转换，表示待打印字符的最大数量<br/>对于整型转换，表示待打印数字的最小位数,如有必要，使用前导0来达到这个位数<br/>示例: “%5.2f”打印一个浮点数，字段宽度为5字符，其中小数点后有两位数字</td>
+</tr>
+<tr>
+<td>h</td>
+<td>整型转换说明一起使用，表示short int或unsigned short int类型的值<br/>示例：示例:”%hu”、”%hx”、”%6.4hd”</td>
+</tr>
+<tr>
+<td>hh</td>
+<td>和整型转换说明一起使用，表示signed char或unsigned char类型的值<br/>示例:”%hhu”、 “%hhx”、”%6.4hhd”</td>
+</tr>
+<tr>
+<td>j</td>
+<td>和整型转换说明一起使用，表示intmax_t或uintmax_t类型的值。这些类型定义在stdint.h中<br/>示例: “%jd”、”%8jx”</td>
+</tr>
+<tr>
+<td>l</td>
+<td>和整型转换说明一起使用，表示long int或unsigned long int类型的值<br/>示例:”%ld”、”%8lu”</td>
+</tr>
+<tr>
+<td>ll</td>
+<td>和浮点转换说明一起使用，表示long long int或unsigned long long int类型的值<br/>示例: “%lld”、”%8llu”</td>
+</tr>
+<tr>
+<td>L</td>
+<td>和浮点转换说明一起使用，表示long double类型的值<br/>示例: “%Ld”、”%10.4Le”</td>
+</tr>
+<tr>
+<td>t</td>
+<td>和整型转换说明一起使用，表示ptrdiff_t类型的值。ptrdiff_t是两个指针差值的类型（C99)<br/>示例:”%td”、”%12ti”</td>
+</tr>
+<tr>
+<td>z</td>
+<td>和整型转换说明一起使用，表示size _t类型的值。size_t是sizeof返回的类型(C99)<br/>示例:”%zd”、”%12zd”</td>
+</tr>
+<tr>
+<td>-</td>
+<td>待打印项左对齐。即，从字段的左侧开始打印该项项<br/>示例:”%-20s”</td>
+</tr>
+<tr>
+<td>+</td>
+<td>有符号值若为正，则在值前面显示加号;若为负，则在值前面显示减号<br/>示例:”%+6.2f”</td>
+</tr>
+<tr>
+<td>空格</td>
+<td>有符号值若为正，则在值前面显示前导空格（不显示任何符号);<br/>若为负，则在值前面显示减号+标记覆盖一个空格<br/>示例”%6.2f”</td>
+</tr>
+<tr>
+<td>#</td>
+<td>把结果转换为另一种形式。如果是<code>%o</code>格式，则以0开始;如果是<code>%x</code>或<code>%X</code>格式，则以0x或0X开始;<br/>对于所有的浮点格式，#保证了即使后面没有任何数字，也打印一个小数点字符。<br/>对于<code>%g </code>和<code>%G</code>格式，#防止结果后面的0被删除<br/></td>
+</tr>
+<tr>
+<td>0</td>
+<td>对于数值格式，用前导0代替空格填充字段宽度。对于整数格式，如果出现-标记或指定精度，则忽略该标记</td>
+</tr>
+</tbody></table>
+<ul>
+<li>类型可移植性</li>
+</ul>
+<p>sizeof 运算符以字节为单位返回类型或值的大小。这应该是某种形式的整数，但是标准只规定了该值是无符号整数。在不同的实现中，它可以是unsigned int、unsigned long甚至是unsigned long long。因此，如果要用printf()函数显示sizeof表达式，根据不同系统，可能使用%u、%lu或%llu。这意味着要查找你当前系统的用法，如果把程序移植到不同的系统还要进行修改。</p>
+<p>鉴于此， C提供了可移植性更好的类型。首先，stddef.h头文件（在包含stdio.h头文件时已包含其中）把<strong>size_t</strong>定义成系统使用<strong>sizeof返回的类型</strong>，这被称为底层类型（underlying type）。其次，printf()使用<strong>z修饰符</strong>表示打印相<br>应的类型。同样，C还定义了ptrdiff_t类型和t修饰符来表示系统使用的两个地址差值的底层有符号整数类型。</p>
+<ul>
+<li>float参数的转换</li>
+</ul>
+<p>对于浮点类型，有用于double和long double类型的转换说明，却没有float类型的。这是因为在K&amp;R C中，表达式或参数中的float类型值会被自动转换成double类型。一般而言，ANSI C不会把float自动转换成double。然<br>而，为保护大量假设float类型的参数被自动转换成double的现有程序，printf()函数中所有float类型的参数（对未使用显式原型的所有C函数都有效）仍自动转换成double类型。因此，无论是K&amp;R C还是ANSI C，都<strong>没有显示float类型值专用的转换说明</strong>。</p>
+<p>示例1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PAGES 959</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%d*\n&quot;</span>, PAGES);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%2d*\n&quot;</span>, PAGES);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%10d*\n&quot;</span>, PAGES);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%-10d*\n&quot;</span>, PAGES);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">*<span class="number">959</span>*</span><br><span class="line">*<span class="number">959</span>*</span><br><span class="line">*       <span class="number">959</span>*</span><br><span class="line">*<span class="number">959</span>       *</span><br></pre></td></tr></table></figure>
+
+<p>示例2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> RENT = <span class="number">3852.99</span>; <span class="comment">// const变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%e*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%4.2f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%3.1f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%10.3f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%10.3E*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%+4.2f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;*%010.2f*\n&quot;</span>, RENT);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">*<span class="number">3852.990000</span>*</span><br><span class="line">*<span class="number">3.852990e+03</span>*</span><br><span class="line">*<span class="number">3852.99</span>*</span><br><span class="line">*<span class="number">3853.0</span>*</span><br><span class="line">*  <span class="number">3852.990</span>*</span><br><span class="line">*<span class="number">3.853E+03</span>*</span><br><span class="line">*+<span class="number">3852.99</span>*</span><br><span class="line">*<span class="number">0003852.99</span>*</span><br></pre></td></tr></table></figure>
+
+<p>示例3</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%x %X %#x\n&quot;</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">31</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;**%d**% d**% d**\n&quot;</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">-42</span>);</span><br><span class="line">    <span class="comment">// 如果0标记和精度一起出现，0标记会被忽略</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;**%5d**%5.3d**%05d**%05.3d**\n&quot;</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="number">1f</span> <span class="number">1F</span> <span class="number">0x1f</span></span><br><span class="line">**<span class="number">42</span>** <span class="number">42</span>**<span class="number">-42</span>**</span><br><span class="line">**    <span class="number">6</span>**  <span class="number">006</span>**<span class="number">00006</span>**  <span class="number">006</span>**</span><br></pre></td></tr></table></figure>
+
+<p>示例4</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BLURB <span class="string">&quot;Authentic imitation!&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%2s]\n&quot;</span>, BLURB);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%24s]\n&quot;</span>, BLURB);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%24.5s]\n&quot;</span>, BLURB);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[%-24.5s]\n&quot;</span>, BLURB);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">[Authentic imitation!]</span><br><span class="line">[    Authentic imitation!]</span><br><span class="line">[                   Authe]</span><br><span class="line">[Authe                   ]</span><br></pre></td></tr></table></figure>
+
+<p>注意，虽然第1个转换说明是%2s，但是字段被扩大为可容纳字符串中的所有字符。还需注意，精度限制了待打印字符的个数。.5告诉printf()只打印5个字符。另外，-标记使得文本左对齐输出。</p>
+<p><strong>PS: prinf拥有返回值，返回值为打印字符的长度，如果有错误返回负数。</strong></p>
+<h2 id="scanf-转换说明"><a href="#scanf-转换说明" class="headerlink" title="scanf 转换说明"></a>scanf 转换说明</h2><blockquote>
+<p>引用于 C Primer Plus  220页</p>
+</blockquote>
+<p>scanf()函数使用<strong>空白</strong>（换行符、制表符和空格）把输入分成多个字段。在依次把转换说明和字段<strong>匹配时跳过空白</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>转换说明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%c</td>
+<td>把输入解释成字符</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>把输入解释成有符号的十进制整数</td>
+</tr>
+<tr>
+<td>%e &#x2F; %f &#x2F; %g &#x2F; %a</td>
+<td>把输入解释成浮点数（C99标准新增了%a）</td>
+</tr>
+<tr>
+<td>%E &#x2F; %F &#x2F; %G &#x2F; %A</td>
+<td>把输入解释成浮点数（C99标准新增了%A)</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>把输入解释成有符号十进制整数</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>把输入解释成有符号八进制整数</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>把输入解释成指针（地址）</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>把输入解释成字符串。从第一个非空白字符开始，到下一个空白字符之前的所有字符都是输入</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>把输入解释成无符号十进制整数</td>
+</tr>
+<tr>
+<td>%x &#x2F; %X</td>
+<td>把输入解释成有符号十六进制整数</td>
+</tr>
+</tbody></table>
+<p>scanf 转换说明修饰符</p>
+<table>
+<thead>
+<tr>
+<th>转换说明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>抑制赋值<br/>示例：“%*d”</td>
+</tr>
+<tr>
+<td>数字</td>
+<td>最大字段宽度，输入达到最大字段宽度处，或第一次遇到空白字符时停止<br/>示例：”%10s”</td>
+</tr>
+<tr>
+<td>hh</td>
+<td>把整数作为signed char 或 unsigned char 类型读取<br/>示例：”%hhd” 、”%hhu”</td>
+</tr>
+<tr>
+<td>ll</td>
+<td>把整数作为long long 或 unsigned long long 类型读取<br/>示例：”%lld” 、”%llu”</td>
+</tr>
+<tr>
+<td>h、l或L</td>
+<td>“%hd”和”%hi”表明把对应的值储存为short int类型“<br/>“%ho”、”%hx”和”%hu”表明把对应的值储存为unsigned short int类型<br/>“%ld”和”%li”表明把对应的值储存为long类型<br/>“%lo”、”%lx”和”%lu”表明把对应的值储存为unsigned long类型<br/>“%le”、”%lf”和”%lg”表明把对应的值储存为double类型<br/>在e、f和g前面使用L而不是l，表明把对应的值被储存为long double类型。如果没有修饰符，d、i、o和x表明对应的值被储存为int类型,f和g表明把对应的值储存为float类型</td>
+</tr>
+<tr>
+<td>j</td>
+<td>在整型转换说明后面时，表明使用intmax_t或uintmax_t类型（C99）<br/>示例：”%jd”</td>
+</tr>
+<tr>
+<td>z</td>
+<td>在整型转换说明后面时，表明使用sizeof的返回类型（C99）</td>
+</tr>
+<tr>
+<td>t</td>
+<td>在整型转换说明后面时，表明使用表示两个指针差值的类型（C99）<br/>示例：”%td”、”%tx”</td>
+</tr>
+</tbody></table>
+<p>除了%c，其他转换说明都会自动跳过待输入值前面所有的空白。因此，<code>scanf(&quot;%d%d&quot;, &amp;n, &amp;m)</code>与<code>scanf(&quot;%d %d&quot;, &amp;n, &amp;m)</code>的行为相同。</p>
+<p>对于%c，在格式字符串中添加一个空格字符会有所不同。例如，如果把%c放在格式字符串中的空格前面，scanf()便会跳过空格，从第1个非空白字符开始读取。也就是说，</p>
+<ul>
+<li><code>scanf(&quot;%c&quot;, &amp;ch)</code>从输入中的第1个字符开始读取</li>
+<li><code>scanf(&quot; %c&quot;, &amp;ch)</code>则从第1个非空白字符开始读取。</li>
+</ul>
+<h2 id="printf的-修饰符"><a href="#printf的-修饰符" class="headerlink" title="printf的*修饰符"></a>printf的*修饰符</h2><blockquote>
+<p>引用于 C Primer Plus  224页</p>
+</blockquote>
+<p>如果你不想预先指定字段宽度，希望通过程序来指定，那么可以用*修饰符代替字段宽度。但还是要用一个参数告诉函数，字段宽度应该是多少。也就是说，如果转换说明是%*d，那么参数列表中应包含*和d对应的值。这个技巧也可用于浮点值指定精度和字段宽度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> width, precision;</span><br><span class="line">    <span class="type">int</span> number = <span class="number">256</span>;</span><br><span class="line">    <span class="type">double</span> weight = <span class="number">242.5</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a field width:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;width);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;The number is :%*d:\n&quot;</span>, width, number);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Now enter a width and a precision:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;width, &amp;precision);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Weight = %*.*f\n&quot;</span>, width, precision, weight);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Done!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行示例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Enter a field width:</span><br><span class="line"><span class="number">6</span></span><br><span class="line">The number is :   <span class="number">256</span>:</span><br><span class="line">Now enter a width and a precision:</span><br><span class="line"><span class="number">8</span> <span class="number">3</span></span><br><span class="line">Weight =  <span class="number">242.500</span></span><br><span class="line">Done!</span><br></pre></td></tr></table></figure>
+
+<h2 id="scanf的-修饰符"><a href="#scanf的-修饰符" class="headerlink" title="scanf的*修饰符"></a>scanf的*修饰符</h2><blockquote>
+<p>引用于 C Primer Plus  226页</p>
+</blockquote>
+<p>把*放在%和转换字符之间时，会使得scanf()跳过相应的输出项。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please enter three integers:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%*d %*d %d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;The last integer was %d\n&quot;</span>, n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>scanf()指示：跳过两个整数，把第3个整数拷贝给n。下面是一个运行示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Please enter three integers:</span><br><span class="line"><span class="number">2013</span> <span class="number">2014</span> <span class="number">2015</span></span><br><span class="line">The last integer was <span class="number">2015</span></span><br></pre></td></tr></table></figure>
+
+<p>在程序需要<strong>读取文件中特定列的内容</strong>时，这项跳过功能很有用.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://vvc.wiki">vvc</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://vvc.wiki/C/CPrimerPlus/">http://vvc.wiki/C/CPrimerPlus/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://vvc.wiki" target="_blank">VVC</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C/">C</a></div><div class="post_share"><div class="social-share" data-image="https://vvc.obs.cn-east-3.myhuaweicloud.com/c_logo.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/C/Makefile/"><img class="prev-cover" src="https://vvc.obs.cn-east-3.myhuaweicloud.com/Makefile_logo.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Makefile</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/C/Makefile/" title="Makefile"><img class="cover" src="https://vvc.obs.cn-east-3.myhuaweicloud.com/Makefile_logo.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-31</div><div class="title">Makefile</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%88%9D%E8%AF%86C%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">第一章 初识C语言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-C%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">第二章 C语言概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A7%E5%BC%8Fc%E4%BB%A3%E7%A0%81main%E5%87%BD%E6%95%B0%E5%86%99%E6%B3%95%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">旧式c代码main函数写法问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E9%95%BF%E5%BA%A6%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">标识符长度问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%95%B0%E6%8D%AE%E5%92%8CC"><span class="toc-number">3.</span> <span class="toc-text">第三章 数据和C</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%AD%98%E5%9C%A8scanf%E6%97%B6getchar%E4%BD%BF%E7%A8%8B%E5%BA%8F%E6%9A%82%E5%81%9C"><span class="toc-number">3.1.</span> <span class="toc-text">程序中存在scanf时getchar使程序暂停</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf%E9%81%97%E6%BC%8F%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">printf遗漏参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E5%9E%8B"><span class="toc-number">3.3.</span> <span class="toc-text">整型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E8%BF%9B%E5%88%B6-x2F-%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%89%93%E5%8D%B0%EF%BC%8C%E6%98%BE%E7%A4%BA%E5%89%8D%E7%BC%80"><span class="toc-number">3.3.1.</span> <span class="toc-text">八进制&#x2F;十六进制打印，显示前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B%E5%AD%97%E8%8A%82%E6%95%B0%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">3.3.2.</span> <span class="toc-text">c整数类型字节数不同的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E9%BB%98%E8%AE%A4%E7%B1%BB%E5%9E%8B%E5%8F%8A%E7%BC%96%E8%AF%91%E5%99%A8%E5%B0%9D%E8%AF%95%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.3.3.</span> <span class="toc-text">整数默认类型及编译器尝试顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B%E6%89%93%E5%8D%B0%E7%9A%84%E5%8D%A0%E4%BD%8D%E7%AC%A6%E9%97%AE%E9%A2%98"><span class="toc-number">3.3.4.</span> <span class="toc-text">整数类型打印的占位符问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E7%A7%BB%E6%A4%8D%E7%B1%BB%E5%9E%8B%EF%BC%9Astdint-h%E5%92%8Cinttypes-h"><span class="toc-number">3.3.5.</span> <span class="toc-text">可移植类型：stdint.h和inttypes.h</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="toc-number">3.4.</span> <span class="toc-text">浮点型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E8%A7%84%E5%AE%9A%E7%9A%84%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B2%BE%E5%BA%A6%E6%A0%87%E5%87%86"><span class="toc-number">3.4.1.</span> <span class="toc-text">c规定的浮点数精度标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E9%BB%98%E8%AE%A4%E7%B2%BE%E5%BA%A6"><span class="toc-number">3.4.2.</span> <span class="toc-text">浮点数默认精度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">3.4.3.</span> <span class="toc-text">十六进制表示浮点数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E4%B8%8A%E6%BA%A2%E5%92%8C%E4%B8%8B%E6%BA%A2"><span class="toc-number">3.4.4.</span> <span class="toc-text">浮点数上溢和下溢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%88%8D%E5%85%A5%E9%94%99%E8%AF%AF"><span class="toc-number">3.4.5.</span> <span class="toc-text">浮点数舍入错误</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%85%A5-x2F-%E8%BE%93%E5%87%BA"><span class="toc-number">4.</span> <span class="toc-text">第四章 字符串和格式化输入&#x2F;输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%8E%E7%A4%BA%E5%B8%B8%E9%87%8F"><span class="toc-number">4.1.</span> <span class="toc-text">明示常量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf-%E8%BD%AC%E6%8D%A2%E8%AF%B4%E6%98%8E"><span class="toc-number">4.2.</span> <span class="toc-text">printf 转换说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf-%E8%BD%AC%E6%8D%A2%E8%AF%B4%E6%98%8E"><span class="toc-number">4.3.</span> <span class="toc-text">scanf 转换说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#printf%E7%9A%84-%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">4.4.</span> <span class="toc-text">printf的*修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf%E7%9A%84-%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">4.5.</span> <span class="toc-text">scanf的*修饰符</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://vvc.obs.cn-east-3.myhuaweicloud.com/cover.png')"><div id="footer-wrap"><div class="copyright">&copy;2022 By vvc</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
